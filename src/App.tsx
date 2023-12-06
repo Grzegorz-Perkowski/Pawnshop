@@ -1,9 +1,10 @@
 import "./App.css";
+import PawnshopList from "./components/PawnshopList/PawnshopList";
 
 function App() {
   return (
     <>
-      <p>Click on the Vite and React logos to learn more</p>
+      <PawnshopList />
     </>
   );
 }
