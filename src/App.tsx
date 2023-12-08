@@ -1,10 +1,23 @@
 import "./App.css";
-import PawnshopList from "./components/PawnshopList/PawnshopList";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar/Navbar";
+import ProductList from "./components/ProductsList/ProductsList";
+import ProductDetails from "./components/ProductDetails/ProductDetails";
+import NotFound from "./components/NotFound/NotFound";
+import Cart from "./components/Cart/Cart";
 
 function App() {
   return (
     <>
-      <PawnshopList />
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<ProductList />} />
+          <Route path="products/:id" element={<ProductDetails />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

@@ -1,4 +1,5 @@
 import { useGetAllProductsQuery } from "../../features/api/apiSlice";
+import ProductItem from "../ProductItem/ProductItem";
 
 export default function PawnshopList() {
   const { data: products, isLoading, isError } = useGetAllProductsQuery();
@@ -19,8 +20,7 @@ export default function PawnshopList() {
     <div>
       {products.map((product) => (
         <div key={product.id}>
-          <h2>{product.title}</h2>
-          <img src={product.image} alt={product.title} />
+          <ProductItem {...product} />
         </div>
       ))}
     </div>
