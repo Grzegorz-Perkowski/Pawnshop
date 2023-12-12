@@ -15,7 +15,7 @@ export default function ProductItem({
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
-    dispatch(addToCart({ id, quantity: 1 }));
+    dispatch(addToCart({ id, quantity: 1, price }));
   };
 
   return (

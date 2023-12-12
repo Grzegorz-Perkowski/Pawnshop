@@ -4,6 +4,11 @@ import CartItem from "../CartItem/CartItem";
 export default function Cart() {
   const cart = useSelector((state: { cart: ICartItem[] }) => state.cart);
 
+  const totalSum = cart.reduce(
+    (sum, { price }) => (price !== undefined ? sum + price : sum),
+    0
+  );
+
   return (
     <div>
       {cart?.map(({ id, quantity }) => (
@@ -11,6 +16,9 @@ export default function Cart() {
           <CartItem id={id} quantity={quantity} />
         </div>
       ))}
+      <div>
+        <strong>Total Sum: ${totalSum.toFixed(2)}</strong>
+      </div>
     </div>
   );
 }
