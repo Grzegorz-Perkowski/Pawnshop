@@ -1,5 +1,7 @@
-import { Link } from "@mui/material";
+import { Button, Link } from "@mui/material";
 import { Product } from "../../interfaces/Product.interface";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../features/cart/cartSlice";
 
 export default function ProductItem({
   id,
@@ -10,6 +12,12 @@ export default function ProductItem({
   image,
   rating,
 }: Product) {
+  const dispatch = useDispatch();
+
+  const handleAddToCart = () => {
+    dispatch(addToCart({ id, quantity: 1 }));
+  };
+
   return (
     <div>
       <p>{id}</p>
@@ -21,6 +29,7 @@ export default function ProductItem({
       <p>{rating.rate}</p>
       <p>{rating.count}</p>
       <Link href={`/products/${id}`}>View</Link>
+      <Button onClick={handleAddToCart}>Add to cart</Button>
     </div>
   );
 }
