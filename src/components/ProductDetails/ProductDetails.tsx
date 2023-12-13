@@ -1,6 +1,6 @@
 import { useGetProductByIdQuery } from "../../features/api/apiSlice";
 import { useParams } from "react-router-dom";
-import { Product } from "../../interfaces/Product.interface";
+import { IProduct } from "../../interfaces/Product.interface";
 
 const ProductDetails = () => {
   const { id } = useParams<{ id?: string }>();
@@ -22,7 +22,7 @@ const ProductDetails = () => {
     return <div>No data available</div>;
   }
 
-  const { title, price, description, category, image, rating }: Product =
+  const { title, price, description, category, image, rating }: IProduct =
     product;
 
   return (

@@ -1,6 +1,6 @@
-import { CartItem as ICartItem } from "../../interfaces/Cart.interface";
+import { ICartItem } from "../../interfaces/Cart.interface";
 import { useGetProductByIdQuery } from "../../features/api/apiSlice";
-import { Product } from "../../interfaces/Product.interface";
+import { IProduct } from "../../interfaces/Product.interface";
 
 export default function CartItem({ id, quantity }: ICartItem) {
   const { data } = useGetProductByIdQuery(id);
@@ -10,7 +10,7 @@ export default function CartItem({ id, quantity }: ICartItem) {
   }
 
   const { title, price, description, category, image, rating } =
-    data as Product;
+    data as IProduct;
 
   return (
     <div>

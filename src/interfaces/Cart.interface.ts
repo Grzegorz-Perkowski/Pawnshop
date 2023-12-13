@@ -1,7 +1,7 @@
-export interface CartItem {
+export interface ICartItem {
   id: number;
   quantity: number;
   price?: number;
 }
 
-export interface CartState extends Array<CartItem> {}
+export interface ICartState extends Array<ICartItem> {}

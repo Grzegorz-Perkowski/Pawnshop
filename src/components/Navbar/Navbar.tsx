@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { CartItem as ICartItem } from "../../interfaces/Cart.interface";
+import { ICartItem } from "../../interfaces/Cart.interface";
 
 function Navbar() {
   const cart = useSelector((state: { cart: ICartItem[] }) => state.cart);

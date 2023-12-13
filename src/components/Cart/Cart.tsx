@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { CartItem as ICartItem } from "../../interfaces/Cart.interface";
+import { ICartItem } from "../../interfaces/Cart.interface";
 import CartItem from "../CartItem/CartItem";
 export default function Cart() {
   const cart = useSelector((state: { cart: ICartItem[] }) => state.cart);

@@ -1,5 +1,5 @@
 import { Button, Link } from "@mui/material";
-import { Product } from "../../interfaces/Product.interface";
+import { IProduct } from "../../interfaces/Product.interface";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../features/cart/cartSlice";
 
@@ -11,7 +11,7 @@ export default function ProductItem({
   category,
   image,
   rating,
-}: Product) {
+}: IProduct) {
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {

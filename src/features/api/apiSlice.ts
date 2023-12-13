@@ -1,14 +1,14 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { Product } from "../../interfaces/Product.interface";
+import { IProduct } from "../../interfaces/Product.interface";
 
 export const pawnshopApi = createApi({
   reducerPath: "pawnshopApi",
   baseQuery: fetchBaseQuery({ baseUrl: "https://fakestoreapi.com" }),
   endpoints: (builder) => ({
-    getAllProducts: builder.query<Product[], void>({
+    getAllProducts: builder.query<IProduct[], void>({
       query: () => "products",
     }),
-    getProductById: builder.query<Product, number>({
+    getProductById: builder.query<IProduct, number>({
       query: (id) => `products/${id}`,
     }),
     getAllCategories: builder.query<string[], void>({
