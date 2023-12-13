@@ -66,11 +66,15 @@ export default function ProductsList() {
 
       <div>
         <h3>Filtered Products:</h3>
-        {filteredProducts.map((product) => (
-          <div key={product.id}>
-            <ProductItem {...product} />
-          </div>
-        ))}
+        {filteredProducts.length === 0 ? (
+          <div>No products match the selected filters</div>
+        ) : (
+          filteredProducts.map((product) => (
+            <div key={product.id}>
+              <ProductItem {...product} />
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

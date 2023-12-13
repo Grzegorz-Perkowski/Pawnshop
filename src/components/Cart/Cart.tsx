@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { ICartItem } from "../../interfaces/Cart.interface";
 import CartItem from "../CartItem/CartItem";
+
 export default function Cart() {
   const cart = useSelector((state: { cart: ICartItem[] }) => state.cart);
 
@@ -11,14 +12,22 @@ export default function Cart() {
 
   return (
     <div>
-      {cart?.map(({ id, quantity }) => (
-        <div key={id}>
-          <CartItem id={id} quantity={quantity} />
+      {cart.length > 0 ? (
+        <div>
+          {cart.map(({ id, quantity }) => (
+            <div key={id}>
+              <CartItem id={id} quantity={quantity} />
+            </div>
+          ))}
+          <div>
+            <strong>Total Sum: ${totalSum.toFixed(2)}</strong>
+          </div>
         </div>
-      ))}
-      <div>
-        <strong>Total Sum: ${totalSum.toFixed(2)}</strong>
-      </div>
+      ) : (
+        <div>
+          <p>Your cart is empty. Add items to your cart to see them here.</p>
+        </div>
+      )}
     </div>
   );
 }
