@@ -11,7 +11,10 @@ export const pawnshopApi = createApi({
     getProductById: builder.query<Product, number>({
       query: (id) => `products/${id}`,
     }),
+    getAllCategories: builder.query<string[], void>({
+      query: () => "products/categories",
+    }),
   }),
 });
 
-export const { useGetAllProductsQuery, useGetProductByIdQuery } = pawnshopApi;
+export const { useGetAllProductsQuery, useGetProductByIdQuery, useGetAllCategoriesQuery } = pawnshopApi;
