@@ -2,13 +2,12 @@ import { Button, Link } from "@mui/material";
 import { IProduct } from "../../interfaces/Product.interface";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../features/cart/cartSlice";
+import { Typography } from "@mui/material";
 
 export default function ProductItem({
   id,
   title,
   price,
-  description,
-  category,
   image,
   rating,
 }: IProduct) {
@@ -19,17 +18,17 @@ export default function ProductItem({
   };
 
   return (
-    <div>
-      <p>{id}</p>
-      <img src={image} alt={title} />
-      <p>{title}</p>
-      <p>{price}</p>
-      <p>{description}</p>
-      <p>{category}</p>
-      <p>{rating.rate}</p>
-      <p>{rating.count}</p>
-      <Link href={`/products/${id}`}>View</Link>
-      <Button onClick={handleAddToCart}>Add to cart</Button>
-    </div>
+    <>
+      <img src={image} alt={title} height="300px" />
+      <Typography variant="h6">{title}</Typography>
+      <Typography variant="body1">Price: ${price}</Typography>
+      <Typography variant="caption">
+        Rating: {rating.rate} ({rating.count} reviews)
+      </Typography>
+      <div>
+        <Link href={`/products/${id}`}>View</Link>
+        <Button onClick={handleAddToCart}>Add to cart</Button>
+      </div>
+    </>
   );
 }

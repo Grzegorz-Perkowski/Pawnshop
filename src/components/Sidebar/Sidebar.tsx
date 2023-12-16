@@ -1,3 +1,11 @@
+import {
+  FormControl,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  Typography,
+  Box,
+} from "@mui/material";
 import { ISidebarProps } from "../../interfaces/Sidebar.interface";
 
 function Sidebar({
@@ -8,94 +16,83 @@ function Sidebar({
   handlePriceRangeChange,
 }: ISidebarProps) {
   return (
-    <div>
+    <Box
+      sx={{
+        display: "flex",
+        gap: "2rem",
+        flexDirection: "column",
+        alignItems: "center",
+        p: 4,
+      }}
+    >
       <div>
-        <h3>Categories:</h3>
-        <div>
-          <input
-            type="radio"
-            id="all"
+        <Typography variant="h3" mb={2} color="primary">
+          Categories:
+        </Typography>
+        <FormControl component="fieldset">
+          <RadioGroup
+            aria-label="categories"
             name="categories"
-            value="all"
-            checked={selectedCategory === "all"}
+            value={selectedCategory}
             onChange={handleCategoryChange}
-          />
-          <label htmlFor="all">All</label>
-        </div>
-        {categories?.map((category) => (
-          <div key={category}>
-            <input
-              type="radio"
-              id={category}
-              name="categories"
-              value={category}
-              checked={selectedCategory === category}
-              onChange={handleCategoryChange}
+          >
+            <FormControlLabel
+              value="all"
+              control={<Radio />}
+              label={<Typography fontSize="2rem">All</Typography>}
             />
-            <label htmlFor={category}>{category}</label>
-          </div>
-        ))}
+            {categories?.map((category) => (
+              <FormControlLabel
+                key={category}
+                value={category}
+                control={<Radio />}
+                label={<Typography fontSize="2rem">{category}</Typography>}
+              />
+            ))}
+          </RadioGroup>
+        </FormControl>
       </div>
 
       <div>
-        <h3>Price Ranges:</h3>
-        <div>
-          <input
-            type="radio"
-            id="all"
+        <Typography variant="h3" mb={2} color="primary">
+          Price Ranges:
+        </Typography>
+        <FormControl component="fieldset">
+          <RadioGroup
+            aria-label="priceRanges"
             name="priceRanges"
-            value="all"
-            checked={selectedPriceRange === "all"}
+            value={selectedPriceRange}
             onChange={handlePriceRangeChange}
-          />
-          <label htmlFor="all">All Prices</label>
-        </div>
-        <div>
-          <input
-            type="radio"
-            id="0-50"
-            name="priceRanges"
-            value="0-50"
-            checked={selectedPriceRange === "0-50"}
-            onChange={handlePriceRangeChange}
-          />
-          <label htmlFor="0-50">0 - 50</label>
-        </div>
-        <div>
-          <input
-            type="radio"
-            id="50-100"
-            name="priceRanges"
-            value="50-100"
-            checked={selectedPriceRange === "50-100"}
-            onChange={handlePriceRangeChange}
-          />
-          <label htmlFor="50-100">50 - 100</label>
-        </div>
-        <div>
-          <input
-            type="radio"
-            id="100-150"
-            name="priceRanges"
-            value="100-150"
-            checked={selectedPriceRange === "100-150"}
-            onChange={handlePriceRangeChange}
-          />
-          <label htmlFor="100-150">100 - 150</label>
-        </div>
-        <div>
-          <input
-            type="radio"
-            id="over-150"
-            name="priceRanges"
-            value="over-150"
-            checked={selectedPriceRange === "over-150"}
-            onChange={handlePriceRangeChange}
-          />
-          <label htmlFor="over-150">Over 150</label>
-        </div>
+          >
+            <FormControlLabel
+              value="all"
+              control={<Radio />}
+              label={<Typography fontSize="2rem">All Prices</Typography>}
+            />
+            <FormControlLabel
+              value="0-50"
+              control={<Radio />}
+              label={<Typography fontSize="2rem">0 - 50</Typography>}
+            />
+            <FormControlLabel
+              value="50-100"
+              control={<Radio />}
+              label={<Typography fontSize="2rem">50 - 100</Typography>}
+            />
+            <FormControlLabel
+              value="100-150"
+              control={<Radio />}
+              label={<Typography fontSize="2rem">100 - 150</Typography>}
+            />
+            <FormControlLabel
+              value="over-150"
+              control={<Radio />}
+              label={<Typography fontSize="2rem">Over 150</Typography>}
+            />
+          </RadioGroup>
+        </FormControl>
       </div>
-    </div>
+    </Box>
   );
 }
 

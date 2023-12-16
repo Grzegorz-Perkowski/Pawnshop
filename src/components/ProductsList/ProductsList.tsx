@@ -5,6 +5,7 @@ import {
 } from "../../features/api/apiSlice";
 import ProductItem from "../ProductItem/ProductItem";
 import Sidebar from "../Sidebar/Sidebar";
+import { Grid, Typography, Box } from "@mui/material";
 
 export default function ProductsList() {
   const { data: products, isLoading, isError } = useGetAllProductsQuery();
@@ -55,27 +56,52 @@ export default function ProductsList() {
     });
 
   return (
-    <div>
-      <Sidebar
-        categories={categories ?? []}
-        selectedCategory={selectedCategory}
-        handleCategoryChange={handleCategoryChange}
-        selectedPriceRange={selectedPriceRange}
-        handlePriceRangeChange={handlePriceRangeChange}
-      />
-
-      <div>
-        <h3>Filtered Products:</h3>
-        {filteredProducts.length === 0 ? (
-          <div>No products match the selected filters</div>
-        ) : (
-          filteredProducts.map((product) => (
-            <div key={product.id}>
-              <ProductItem {...product} />
-            </div>
-          ))
-        )}
-      </div>
-    </div>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      <Grid container spacing={3} maxWidth="1536px">
+        <Grid item xs={12} md={2}>
+          <Sidebar
+            categories={categories ?? []}
+            selectedCategory={selectedCategory}
+            handleCategoryChange={handleCategoryChange}
+            selectedPriceRange={selectedPriceRange}
+            handlePriceRangeChange={handlePriceRangeChange}
+          />
+        </Grid>
+        <Grid item xs={12} md={10}>
+          {filteredProducts.length === 0 ? (
+            <Typography variant="body1">
+              No products match the selected filters
+            </Typography>
+          ) : (
+            <Grid container spacing={2}>
+              {filteredProducts.map((product) => (
+                <Grid
+                  key={product.id}
+                  item
+                  xs={12}
+                  sm={6}
+                  md={4}
+                  lg={3}
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    flexDirection: "column",
+                    gap: 2,
+                    m: 5,
+                  }}
+                >
+                  <ProductItem {...product} />
+                </Grid>
+              ))}
+            </Grid>
+          )}
+        </Grid>
+      </Grid>
+    </Box>
   );
 }
