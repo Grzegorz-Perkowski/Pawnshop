@@ -1,6 +1,11 @@
+import { ICartItem } from "../../interfaces/Cart.interface";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { ICartItem } from "../../interfaces/Cart.interface";
+import Badge from "@mui/material/Badge";
 
 function Navbar() {
   const cart = useSelector((state: { cart: ICartItem[] }) => state.cart);
@@ -11,12 +16,23 @@ function Navbar() {
   );
 
   return (
-    <div>
-      <Link to="/">Home</Link>
-      <br />
-      <Link to="/cart">Cart</Link>
-      {totalQuantity > 0 ? <span>({totalQuantity})</span> : <span>(0)</span>}
-    </div>
+    <AppBar position="static">
+      <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Typography variant="h5" component="div">
+          <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+            FAKE SHOP
+          </Link>
+        </Typography>
+
+        <Typography variant="h6" component="div">
+          <Link to="/cart" style={{ textDecoration: "none", color: "white" }}>
+            <Badge badgeContent={totalQuantity} color="error">
+              <ShoppingCartIcon sx={{ fontSize: 30 }} />
+            </Badge>
+          </Link>
+        </Typography>
+      </Toolbar>
+    </AppBar>
   );
 }
 
