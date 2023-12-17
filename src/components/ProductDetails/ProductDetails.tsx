@@ -1,11 +1,13 @@
 import { useGetProductByIdQuery } from "../../features/api/apiSlice";
 import { useParams } from "react-router-dom";
 import { IProduct } from "products-types";
+import styled from "@emotion/styled";
+
 import CircularLoader from "../CircularProgress/CircularProgress";
+
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import styled from "@emotion/styled";
 
 const ProductDetails = () => {
   const { id } = useParams<{ id?: string }>();
