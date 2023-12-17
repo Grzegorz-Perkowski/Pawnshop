@@ -5,10 +5,12 @@ import {
 } from "../../features/api/apiSlice";
 import ProductItem from "../ProductItem/ProductItem";
 import FilterOptions from "../FilterOptions/FilterOptions";
-import { Grid, Box } from "@mui/material";
+import Grid from "@mui/material/Grid/Grid";
 import Popover from "@mui/material/Popover";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import CircularLoader from "../CircularProgress/CircularProgress";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/system/Box/Box";
 
 export default function ProductsList() {
   const { data: products, isLoading, isError } = useGetAllProductsQuery();
@@ -18,7 +20,7 @@ export default function ProductsList() {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <CircularLoader />;
   }
 
   if (isError) {
@@ -119,22 +121,22 @@ export default function ProductsList() {
             </Popover>
           </Box>
 
-          {filteredProducts.length === 0 ? (
-            <Typography variant="body1">
-              No products match the selected filters
-            </Typography>
-          ) : (
-            <Grid
-              container
-              spacing={2}
-              sx={{
-                display: "flex",
-                justifyContent: "flex-start",
-                alignItems: "center",
-                p: 4,
-              }}
-            >
-              {filteredProducts.map((product) => (
+          <Grid
+            container
+            spacing={2}
+            sx={{
+              display: "flex",
+              p: 4,
+            }}
+          >
+            {filteredProducts.length === 0 ? (
+              <Grid item xs={12}>
+                <Typography variant="h3">
+                  No products match the selected filters
+                </Typography>
+              </Grid>
+            ) : (
+              filteredProducts.map((product) => (
                 <Grid
                   key={product.id}
                   item
@@ -144,17 +146,16 @@ export default function ProductsList() {
                   lg={3}
                   sx={{
                     display: "flex",
-                    justifyContent: "space-between",
                     flexDirection: "column",
-                    gap: 2,
                     minWidth: "300px",
+                    p: 4,
                   }}
                 >
                   <ProductItem {...product} />
                 </Grid>
-              ))}
-            </Grid>
-          )}
+              ))
+            )}
+          </Grid>
         </Box>
       </Box>
     </Box>

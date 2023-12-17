@@ -1,12 +1,10 @@
-import {
-  FormControl,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-  Typography,
-  Box,
-} from "@mui/material";
 import { ISidebarProps } from "../../interfaces/Sidebar.interface";
+import FormControl from "@mui/material/FormControl";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/system/Box/Box";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 function FilterOptions({
   categories,

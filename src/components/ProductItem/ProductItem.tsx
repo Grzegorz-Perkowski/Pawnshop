@@ -2,7 +2,8 @@ import { Button, Link } from "@mui/material";
 import { IProduct } from "../../interfaces/Product.interface";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../features/cart/cartSlice";
-import { Typography, Box } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/system/Box/Box";
 import styled from "@emotion/styled";
 import StarRateIcon from "@mui/icons-material/StarRate";
 
@@ -20,15 +21,42 @@ export default function ProductItem({
   };
 
   return (
-    <Box>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "space-between",
+        flexDirection: "column",
+        height: "100%",
+        gap: 1,
+      }}
+    >
       <Image src={image} alt={title} />
       <Typography variant="h6">{title}</Typography>
-      <Typography variant="body1">Price: ${price}</Typography>
-      <Typography variant="caption">
-        Rating: {rating.rate} <StarRateIcon color="error" /> ({rating.count}{" "}
-        reviews)
-      </Typography>
-      <Box>
+      <Typography variant="subtitle1">Price: ${price}</Typography>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          gap: 1,
+          flexDirection: "row",
+        }}
+      >
+        <Typography>Rating: {rating.rate} </Typography>
+        <StarRateIcon
+          color="warning"
+          sx={{
+            fontSize: "1.4rem",
+          }}
+        />
+        <Typography>({rating.count} reviews)</Typography>
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          gap: 2,
+        }}
+      >
         <Link href={`/products/${id}`}>
           <Button variant="contained">Read More</Button>
         </Link>
