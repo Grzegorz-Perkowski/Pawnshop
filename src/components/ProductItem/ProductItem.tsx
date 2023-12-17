@@ -2,8 +2,9 @@ import { Button, Link } from "@mui/material";
 import { IProduct } from "../../interfaces/Product.interface";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../features/cart/cartSlice";
-import { Typography } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import styled from "@emotion/styled";
+import StarRateIcon from "@mui/icons-material/StarRate";
 
 export default function ProductItem({
   id,
@@ -19,18 +20,23 @@ export default function ProductItem({
   };
 
   return (
-    <>
+    <Box>
       <Image src={image} alt={title} />
       <Typography variant="h6">{title}</Typography>
       <Typography variant="body1">Price: ${price}</Typography>
       <Typography variant="caption">
-        Rating: {rating.rate} ({rating.count} reviews)
+        Rating: {rating.rate} <StarRateIcon color="error" /> ({rating.count}{" "}
+        reviews)
       </Typography>
-      <div>
-        <Link href={`/products/${id}`}>View</Link>
-        <Button onClick={handleAddToCart}>Add to cart</Button>
-      </div>
-    </>
+      <Box>
+        <Link href={`/products/${id}`}>
+          <Button variant="contained">Read More</Button>
+        </Link>
+        <Button onClick={handleAddToCart} variant="outlined">
+          Add to cart
+        </Button>
+      </Box>
+    </Box>
   );
 }
 

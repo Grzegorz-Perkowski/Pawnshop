@@ -46,7 +46,11 @@ function FilterOptions({
                 key={category}
                 value={category}
                 control={<Radio />}
-                label={<Typography fontSize="2rem">{category}</Typography>}
+                label={
+                  <Typography fontSize="2rem">
+                    {category.charAt(0).toUpperCase() + category.slice(1)}
+                  </Typography>
+                }
               />
             ))}
           </RadioGroup>

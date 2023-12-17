@@ -71,89 +71,91 @@ export default function ProductsList() {
   const id = open ? "simple-popover" : undefined;
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        flexDirection: "column",
-        alignItems: "flex-start",
-      }}
-    >
+    <Box>
       <Box
         sx={{
           display: "flex",
           justifyContent: "center",
           flexDirection: "column",
-          maxWidth: "1500px",
+          alignItems: "flex-start",
         }}
       >
         <Box
           sx={{
-            p: 4,
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "column",
           }}
         >
-          <Button
-            aria-describedby={id}
-            variant="contained"
-            onClick={handleClick}
-          >
-            Filters &#9660;
-          </Button>
-          <Popover
-            id={id}
-            open={open}
-            anchorEl={anchorEl}
-            onClose={handleClose}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "left",
-            }}
-          >
-            <FilterOptions
-              categories={categories ?? []}
-              selectedCategory={selectedCategory}
-              handleCategoryChange={handleCategoryChange}
-              selectedPriceRange={selectedPriceRange}
-              handlePriceRangeChange={handlePriceRangeChange}
-            />
-          </Popover>
-        </Box>
-
-        {filteredProducts.length === 0 ? (
-          <Typography variant="body1">
-            No products match the selected filters
-          </Typography>
-        ) : (
-          <Grid
-            container
-            spacing={2}
+          <Box
             sx={{
-              display: "flex",
-              justifyContent: "flex-start",
-              alignItems: "center",
               p: 4,
             }}
           >
-            {filteredProducts.map((product) => (
-              <Grid
-                key={product.id}
-                item
-                xs={12}
-                sm={6}
-                md={4}
-                lg={3}
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  flexDirection: "column",
-                  gap: 2,
-                }}
-              >
-                <ProductItem {...product} />
-              </Grid>
-            ))}
-          </Grid>
-        )}
+            <Button
+              aria-describedby={id}
+              variant="contained"
+              onClick={handleClick}
+            >
+              Filters &#9660;
+            </Button>
+            <Popover
+              id={id}
+              open={open}
+              anchorEl={anchorEl}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+            >
+              <FilterOptions
+                categories={categories ?? []}
+                selectedCategory={selectedCategory}
+                handleCategoryChange={handleCategoryChange}
+                selectedPriceRange={selectedPriceRange}
+                handlePriceRangeChange={handlePriceRangeChange}
+              />
+            </Popover>
+          </Box>
+
+          {filteredProducts.length === 0 ? (
+            <Typography variant="body1">
+              No products match the selected filters
+            </Typography>
+          ) : (
+            <Grid
+              container
+              spacing={2}
+              sx={{
+                display: "flex",
+                justifyContent: "flex-start",
+                alignItems: "center",
+                p: 4,
+              }}
+            >
+              {filteredProducts.map((product) => (
+                <Grid
+                  key={product.id}
+                  item
+                  xs={12}
+                  sm={6}
+                  md={4}
+                  lg={3}
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    flexDirection: "column",
+                    gap: 2,
+                    minWidth: "300px",
+                  }}
+                >
+                  <ProductItem {...product} />
+                </Grid>
+              ))}
+            </Grid>
+          )}
+        </Box>
       </Box>
     </Box>
   );
