@@ -1,6 +1,7 @@
 import { useGetProductByIdQuery } from "../../features/api/apiSlice";
 import { useParams } from "react-router-dom";
-import { IProduct } from "../../interfaces/Product.interface";
+import { IProduct } from "products-types";
+import CircularLoader from "../CircularProgress/CircularProgress";
 
 const ProductDetails = () => {
   const { id } = useParams<{ id?: string }>();
@@ -11,7 +12,7 @@ const ProductDetails = () => {
   } = useGetProductByIdQuery(Number(id));
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <CircularLoader />;
   }
 
   if (isError) {

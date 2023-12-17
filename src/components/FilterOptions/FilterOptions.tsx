@@ -1,9 +1,10 @@
-import { ISidebarProps } from "../../interfaces/Sidebar.interface";
+import { IFilterOptionsProps } from "filters-types";
+
 import FormControl from "@mui/material/FormControl";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import Typography from "@mui/material/Typography";
-import Box from "@mui/system/Box/Box";
+import Box from "@mui/material/Box";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
 function FilterOptions({
@@ -12,7 +13,7 @@ function FilterOptions({
   handleCategoryChange,
   selectedPriceRange,
   handlePriceRangeChange,
-}: ISidebarProps) {
+}: IFilterOptionsProps) {
   return (
     <Box
       sx={{
@@ -69,7 +70,7 @@ function FilterOptions({
             <FormControlLabel
               value="all"
               control={<Radio />}
-              label={<Typography fontSize="2rem">All Prices</Typography>}
+              label={<Typography fontSize="2rem">All</Typography>}
             />
             <FormControlLabel
               value="0-50"

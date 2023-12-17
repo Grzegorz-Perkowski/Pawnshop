@@ -1,11 +1,13 @@
-import { Button, Link } from "@mui/material";
-import { IProduct } from "../../interfaces/Product.interface";
+import { IProduct } from "products-types";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../features/cart/cartSlice";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/system/Box/Box";
 import styled from "@emotion/styled";
+
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 import StarRateIcon from "@mui/icons-material/StarRate";
+import Button from "@mui/material/Button";
 
 export default function ProductItem({
   id,
@@ -57,7 +59,7 @@ export default function ProductItem({
           gap: 2,
         }}
       >
-        <Link href={`/products/${id}`}>
+        <Link to={`/products/${id}`}>
           <Button variant="contained">Read More</Button>
         </Link>
         <Button onClick={handleAddToCart} variant="outlined">

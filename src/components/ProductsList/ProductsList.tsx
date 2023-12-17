@@ -3,14 +3,16 @@ import {
   useGetAllProductsQuery,
   useGetAllCategoriesQuery,
 } from "../../features/api/apiSlice";
+
 import ProductItem from "../ProductItem/ProductItem";
+import CircularLoader from "../CircularProgress/CircularProgress";
 import FilterOptions from "../FilterOptions/FilterOptions";
+
 import Grid from "@mui/material/Grid/Grid";
 import Popover from "@mui/material/Popover";
 import Button from "@mui/material/Button";
-import CircularLoader from "../CircularProgress/CircularProgress";
 import Typography from "@mui/material/Typography";
-import Box from "@mui/system/Box/Box";
+import Box from "@mui/material/Box";
 
 export default function ProductsList() {
   const { data: products, isLoading, isError } = useGetAllProductsQuery();

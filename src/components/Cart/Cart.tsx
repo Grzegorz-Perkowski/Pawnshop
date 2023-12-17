@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { ICartItem } from "../../interfaces/Cart.interface";
+import { ICartItem } from "cart-types";
 import CartItem from "../CartItem/CartItem";
 
 export default function Cart() {

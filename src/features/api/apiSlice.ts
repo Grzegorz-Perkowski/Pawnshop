@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { IProduct } from "../../interfaces/Product.interface";
+import { IProduct } from "products-types";
 
 export const shopApi = createApi({
   reducerPath: "shopApi",
@@ -18,3 +18,6 @@ export const shopApi = createApi({
 });
 
 export const { useGetAllProductsQuery, useGetProductByIdQuery, useGetAllCategoriesQuery } = shopApi;
+export const shopApiReducer = {
+  [shopApi.reducerPath]: shopApi.reducer,
+}

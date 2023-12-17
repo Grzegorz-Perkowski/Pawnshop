@@ -1,6 +1,6 @@
-import { ICartItem } from "../../interfaces/Cart.interface";
+import { ICartItem } from "../../types/cart-types";
 import { useGetProductByIdQuery } from "../../features/api/apiSlice";
-import { IProduct } from "../../interfaces/Product.interface";
+import { IProduct } from "../../types/products-types";
 
 export default function CartItem({ id, quantity }: ICartItem) {
   const { data } = useGetProductByIdQuery(id);

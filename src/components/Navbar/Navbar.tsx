@@ -1,11 +1,12 @@
-import { ICartItem } from "../../interfaces/Cart.interface";
+import { ICartItem } from "cart-types";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import Badge from "@mui/material/Badge";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 function Navbar() {
   const cart = useSelector((state: { cart: ICartItem[] }) => state.cart);
