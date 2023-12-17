@@ -4,14 +4,18 @@ import {
   useGetAllCategoriesQuery,
 } from "../../features/api/apiSlice";
 import ProductItem from "../ProductItem/ProductItem";
-import Sidebar from "../Sidebar/Sidebar";
-import { Grid, Typography, Box } from "@mui/material";
+import FilterOptions from "../FilterOptions/FilterOptions";
+import { Grid, Box } from "@mui/material";
+import Popover from "@mui/material/Popover";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 
 export default function ProductsList() {
   const { data: products, isLoading, isError } = useGetAllProductsQuery();
   const { data: categories } = useGetAllCategoriesQuery();
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedPriceRange, setSelectedPriceRange] = useState("all");
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -24,6 +28,14 @@ export default function ProductsList() {
   if (!products || products.length === 0) {
     return <div>No data available</div>;
   }
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   function handleCategoryChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { value } = event.target;
@@ -55,53 +67,94 @@ export default function ProductsList() {
       }
     });
 
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
+
   return (
     <Box
       sx={{
         display: "flex",
         justifyContent: "center",
+        flexDirection: "column",
+        alignItems: "flex-start",
       }}
     >
-      <Grid container spacing={3} maxWidth="1536px">
-        <Grid item xs={12} md={2}>
-          <Sidebar
-            categories={categories ?? []}
-            selectedCategory={selectedCategory}
-            handleCategoryChange={handleCategoryChange}
-            selectedPriceRange={selectedPriceRange}
-            handlePriceRangeChange={handlePriceRangeChange}
-          />
-        </Grid>
-        <Grid item xs={12} md={10}>
-          {filteredProducts.length === 0 ? (
-            <Typography variant="body1">
-              No products match the selected filters
-            </Typography>
-          ) : (
-            <Grid container spacing={2}>
-              {filteredProducts.map((product) => (
-                <Grid
-                  key={product.id}
-                  item
-                  xs={12}
-                  sm={6}
-                  md={4}
-                  lg={3}
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    flexDirection: "column",
-                    gap: 2,
-                    m: 5,
-                  }}
-                >
-                  <ProductItem {...product} />
-                </Grid>
-              ))}
-            </Grid>
-          )}
-        </Grid>
-      </Grid>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          flexDirection: "column",
+          maxWidth: "1500px",
+        }}
+      >
+        <Box
+          sx={{
+            p: 4,
+          }}
+        >
+          <Button
+            aria-describedby={id}
+            variant="contained"
+            onClick={handleClick}
+          >
+            Filters &#9660;
+          </Button>
+          <Popover
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left",
+            }}
+          >
+            <FilterOptions
+              categories={categories ?? []}
+              selectedCategory={selectedCategory}
+              handleCategoryChange={handleCategoryChange}
+              selectedPriceRange={selectedPriceRange}
+              handlePriceRangeChange={handlePriceRangeChange}
+            />
+          </Popover>
+        </Box>
+
+        {filteredProducts.length === 0 ? (
+          <Typography variant="body1">
+            No products match the selected filters
+          </Typography>
+        ) : (
+          <Grid
+            container
+            spacing={2}
+            sx={{
+              display: "flex",
+              justifyContent: "flex-start",
+              alignItems: "center",
+              p: 4,
+            }}
+          >
+            {filteredProducts.map((product) => (
+              <Grid
+                key={product.id}
+                item
+                xs={12}
+                sm={6}
+                md={4}
+                lg={3}
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  flexDirection: "column",
+                  gap: 2,
+                }}
+              >
+                <ProductItem {...product} />
+              </Grid>
+            ))}
+          </Grid>
+        )}
+      </Box>
     </Box>
   );
 }

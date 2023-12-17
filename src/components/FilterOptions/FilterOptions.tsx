@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { ISidebarProps } from "../../interfaces/Sidebar.interface";
 
-function Sidebar({
+function FilterOptions({
   categories,
   selectedCategory,
   handleCategoryChange,
@@ -96,4 +96,4 @@ function Sidebar({
   );
 }
 
-export default Sidebar;
+export default FilterOptions;

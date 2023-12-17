@@ -3,6 +3,7 @@ import { IProduct } from "../../interfaces/Product.interface";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../features/cart/cartSlice";
 import { Typography } from "@mui/material";
+import styled from "@emotion/styled";
 
 export default function ProductItem({
   id,
@@ -19,7 +20,7 @@ export default function ProductItem({
 
   return (
     <>
-      <img src={image} alt={title} height="300px" />
+      <Image src={image} alt={title} />
       <Typography variant="h6">{title}</Typography>
       <Typography variant="body1">Price: ${price}</Typography>
       <Typography variant="caption">
@@ -32,3 +33,9 @@ export default function ProductItem({
     </>
   );
 }
+
+const Image = styled.img`
+  width: 100%;
+  height: 300px;
+  object-fit: contain;
+`;
