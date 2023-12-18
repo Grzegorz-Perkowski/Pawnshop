@@ -1,28 +1,55 @@
 import { ICartItem } from "cart-types";
 import { useGetProductByIdQuery } from "../../features/api/apiSlice";
 import { IProduct } from "products-types";
+import IconButton from "@mui/material/IconButton";
+import RemoveIcon from "@mui/icons-material/Remove";
+import AddIcon from "@mui/icons-material/Add";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import { useDispatch } from "react-redux";
+import { addToCart, removeFromCart } from "../../features/cart/cartSlice";
 
 export default function CartItem({ id, quantity }: ICartItem) {
   const { data } = useGetProductByIdQuery(id);
+
+  const dispatch = useDispatch();
 
   if (!data) {
     return <div>No data available</div>;
   }
 
-  const { title, price, description, category, image, rating } =
-    data as IProduct;
+  const { title, price, image } = data as IProduct;
+
+  const handleAddToCart = () => {
+    dispatch(addToCart({ id, quantity: 1, price }));
+  };
+
+  const handleRemoveFromCart = () => {
+    dispatch(removeFromCart({ id }));
+  };
 
   return (
-    <div>
-      <p>{id}</p>
-      <img src={image} alt={title} />
-      <p>{title}</p>
-      <p>{price}</p>
-      <p>{description}</p>
-      <p>{category}</p>
-      <p>{rating.rate}</p>
-      <p>{rating.count}</p>
-      <p>{quantity}</p>
-    </div>
+    <Box display="flex" alignItems="center" gap={4}>
+      <Box style={{ width: "100px", height: "200px", overflow: "hidden" }}>
+        <img
+          src={image}
+          alt={title}
+          style={{ width: "100%", height: "100%", objectFit: "contain" }}
+        />
+      </Box>
+      <Box>
+        <Typography variant="h6">{title}</Typography>
+        <Typography variant="body2">Price: ${price}</Typography>
+        <Box display="flex" alignItems="center">
+          <IconButton onClick={handleRemoveFromCart}>
+            <RemoveIcon color="primary" />
+          </IconButton>
+          <Typography variant="body1">{quantity}</Typography>
+          <IconButton onClick={handleAddToCart}>
+            <AddIcon color="primary" />
+          </IconButton>
+        </Box>
+      </Box>
+    </Box>
   );
 }

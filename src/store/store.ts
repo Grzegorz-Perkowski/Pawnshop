@@ -3,7 +3,7 @@ import cartReducer from "../features/cart/cartSlice";
 import { shopApiReducer, shopApi } from "../features/api/apiSlice";
 
 export const store = configureStore({
-    reducer: {
+  reducer: {
     ...shopApiReducer,
     cart: cartReducer,
   },

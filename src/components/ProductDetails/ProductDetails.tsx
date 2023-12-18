@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 
 import CircularLoader from "../CircularProgress/CircularProgress";
 
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
@@ -32,35 +32,48 @@ const ProductDetails = () => {
   const { title, description, image }: IProduct = product;
 
   return (
-    <Grid
-      container
-      direction="row"
-      alignItems="center"
-      justifyContent="center"
-      sx={{ minHeight: "100vh", gap: 4 }}
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
     >
-      <Image src={image} alt={title} />
-      <Box
+      <Grid
+        container
         sx={{
-          width: "50%",
-          display: "flex",
-          flexDirection: "column",
+          p: 4,
+          maxWidth: "1400px",
           gap: 4,
         }}
       >
-        <Typography variant="h4" color="primary">
-          {title}
-        </Typography>
-        <Typography variant="body1">{description}</Typography>
-      </Box>
-    </Grid>
+        <Grid item xs={12} md={4}>
+          <Image src={image} alt={title} />
+        </Grid>
+        <Grid item xs={12} md={7}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 4,
+            }}
+          >
+            <Typography variant="h4" color="primary">
+              {title}
+            </Typography>
+            <Typography variant="body1">{description}</Typography>
+          </Box>
+        </Grid>
+      </Grid>
+    </Box>
   );
 };
 
 export default ProductDetails;
 
 const Image = styled.img`
-  width: 30%;
+  width: 100%;
   height: 400px;
   object-fit: contain;
 `;

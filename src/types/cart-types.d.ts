@@ -2,7 +2,7 @@
 declare module 'cart-types' { 
    interface ICartItem {
     id: number;
-    quantity: number;
+    quantity?: number;
     price?: number;
   }
 
