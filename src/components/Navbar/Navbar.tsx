@@ -12,7 +12,7 @@ function Navbar() {
   const cart = useSelector((state: { cart: ICartItem[] }) => state.cart);
 
   const totalQuantity = cart.reduce(
-    (accumulator, currentItem) => accumulator + currentItem.quantity,
+    (accumulator, currentItem) => accumulator + (currentItem.quantity || 0),
     0
   );
 

@@ -1,13 +1,15 @@
 import { ICartItem } from "cart-types";
 import { useGetProductByIdQuery } from "../../features/api/apiSlice";
 import { IProduct } from "products-types";
+import { useDispatch } from "react-redux";
+import { addToCart, removeFromCart } from "../../features/cart/cartSlice";
+
 import IconButton from "@mui/material/IconButton";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { useDispatch } from "react-redux";
-import { addToCart, removeFromCart } from "../../features/cart/cartSlice";
+import Skeleton from "@mui/material/Skeleton";
 
 export default function CartItem({ id, quantity }: ICartItem) {
   const { data } = useGetProductByIdQuery(id);
@@ -15,7 +17,7 @@ export default function CartItem({ id, quantity }: ICartItem) {
   const dispatch = useDispatch();
 
   if (!data) {
-    return <div>No data available</div>;
+    return <Skeleton animation="wave" />;
   }
 
   const { title, price, image } = data as IProduct;

@@ -19,6 +19,7 @@ export default function NotFound() {
       <Container maxWidth="md">
         <Grid container spacing={2}>
           <Grid
+            item
             xs={6}
             sx={{
               display: "flex",
@@ -35,7 +36,7 @@ export default function NotFound() {
               <Button variant="contained">Back Home</Button>
             </Link>
           </Grid>
-          <Grid xs={6}>
+          <Grid item xs={6}>
             <img
               src="https://cdn.pixabay.com/photo/2017/03/09/12/31/error-2129569__340.jpg"
               alt=""

@@ -19,53 +19,41 @@ export default function Cart() {
   );
 
   return (
-    <Container maxWidth="lg">
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
+    <Container maxWidth="md">
+      {cart.length > 0 ? (
+        <Grid
+          container
+          display="flex"
+          flexDirection="column"
+          alignContent="flex-start"
+        >
+          {cart.map(({ id, quantity }) => (
+            <Grid key={id} item width="100%">
+              <CartItem id={id} quantity={quantity} />
+            </Grid>
+          ))}
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+            }}
+          >
+            <Typography variant="h5">
+              Total Sum: ${totalSum.toFixed(2)}
+            </Typography>
+          </Box>
+        </Grid>
+      ) : (
         <Box
           sx={{
-            flexGrow: 1,
             m: 2,
           }}
         >
-          {cart.length > 0 ? (
-            <Grid
-              container
-              display="flex"
-              flexDirection="column"
-              alignContent="flex-start"
-            >
-              {cart.map(({ id, quantity }) => (
-                <Grid key={id} item md={12}>
-                  <CartItem id={id} quantity={quantity} />
-                </Grid>
-              ))}
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                }}
-              >
-                <Typography variant="h5">
-                  Total Sum: ${totalSum.toFixed(2)}
-                </Typography>
-              </Box>
-            </Grid>
-          ) : (
-            <Box>
-              <Typography variant="h3">
-                Your cart is empty. Add items to your cart to see them here.
-              </Typography>
-            </Box>
-          )}
+          <Typography variant="h3">
+            Your cart is empty. Add items to your cart to see them here.
+          </Typography>
         </Box>
-      </Box>
+      )}
     </Container>
   );
 }
