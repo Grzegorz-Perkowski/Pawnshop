@@ -13,6 +13,7 @@ import Popover from "@mui/material/Popover";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
 
 export default function ProductsList() {
   const { data: products, isLoading, isError } = useGetAllProductsQuery();
@@ -75,7 +76,7 @@ export default function ProductsList() {
   const id = open ? "simple-popover" : undefined;
 
   return (
-    <Box>
+    <Container maxWidth="xl">
       <Box
         sx={{
           display: "flex",
@@ -160,6 +161,6 @@ export default function ProductsList() {
           </Grid>
         </Box>
       </Box>
-    </Box>
+    </Container>
   );
 }
